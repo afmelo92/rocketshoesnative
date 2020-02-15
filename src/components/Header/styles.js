@@ -1,17 +1,20 @@
 import styled from 'styled-components';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { RectButton } from 'react-native-gesture-handler';
+import logo from '../../assets/images/rocket_logo.png';
 
 export const Container = styled.View`
   background: #141419;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
-  padding: 5px;
-  border: 1px solid white;
+  padding: 20px;
 `;
 
-export const Logo = styled.Image``;
+export const Logo = styled.Image.attrs({
+  source: logo,
+  resizeMode: 'cover',
+})`
+  width: 185px;
+  height: 24px;
+`;
 
 export const Counter = styled.View`
   width: 18px;
@@ -20,23 +23,46 @@ export const Counter = styled.View`
   background: #7159c1;
   align-items: center;
   justify-content: center;
-  left: 22px;
-  bottom: 8px;
   z-index: 1;
 `;
 
 export const CountNumber = styled.Text`
-  margin: 0;
-  padding: 0;
-  align-self: center;
+  position: absolute;
+  text-align: center;
+  top: -8px;
+  right: -8px;
+  min-width: 18px;
+  min-height: 18px;
   color: #fff;
+  font-size: 12px;
   font-weight: bold;
+  padding: 2px;
+  border-radius: 9px;
+  overflow: hidden;
 `;
 
-export const BasketButton = styled(RectButton)``;
+// export const BasketButton = styled(RectButton)``;
 
-export const Basket = styled(Icon)`
+export const BasketContainer = styled.TouchableOpacity`
+  height: 24px;
+  width: 24px;
+  flex: 1;
+  align-items: flex-end;
+  justify-content: flex-end;
+`;
+
+export const ItemCount = styled.Text`
+  position: absolute;
+  text-align: center;
+  top: -8px;
+  right: -8px;
+  min-width: 18px;
+  min-height: 18px;
+  background: #7159c1;
   color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px;
+  border-radius: 9px;
+  overflow: hidden;
 `;
-
-export const LogoButton = styled(RectButton)``;

@@ -9,7 +9,7 @@ export default function Home({ navigation }) {
     <View
       style={{
         flex: 1,
-        backgroundColor: 'black',
+        backgroundColor: '#191920',
         alignItems: 'center',
         justifyContent: 'center',
       }}

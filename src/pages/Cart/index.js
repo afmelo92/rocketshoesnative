@@ -6,7 +6,14 @@ import { Button, View, Text } from 'react-native';
 
 export default function Cart({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: '#191920',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>CART</Text>
       <Button title="To Home" onPress={() => navigation.navigate('Home')} />
     </View>

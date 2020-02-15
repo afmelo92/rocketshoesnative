@@ -1,31 +1,22 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import logo from '../../assets/images/rocket_logo.png';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {
-  Container,
-  Counter,
-  CountNumber,
-  Basket,
-  Logo,
-  BasketButton,
-  LogoButton,
-} from './styles';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Container, Logo, BasketContainer, ItemCount } from './styles';
 
 export default function Header({ navigation }) {
   console.tron.log(navigation);
 
   return (
     <Container>
-      <LogoButton onPress={() => navigation.navigate('Home')}>
-        <Logo source={logo} />
-      </LogoButton>
-      <Counter>
-        <CountNumber>5</CountNumber>
-      </Counter>
-      <BasketButton onPress={() => navigation.navigate('Cart')}>
-        <Basket name="shopping-basket" size={30} color="#FFF" />
-      </BasketButton>
+      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+        <Logo />
+      </TouchableOpacity>
+      <BasketContainer onPress={() => navigation.navigate('Cart')}>
+        <Icon name="shopping-basket" size={30} color="#FFF" />
+        <ItemCount>5</ItemCount>
+      </BasketContainer>
     </Container>
   );
 }
