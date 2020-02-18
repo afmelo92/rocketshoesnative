@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import {
-  Wrapper,
   Container,
   ProductList,
   ProductContainer,
