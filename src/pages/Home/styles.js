@@ -14,14 +14,13 @@ export const ProductContainer = styled.View`
   border-radius: 4px;
   margin: 5px;
   padding: 5px;
-  align-items: center;
 `;
 
 export const ProductImage = styled.View`
   background: red;
-  width: 200px;
-  height: 200px;
-  border-radius: 10px;
+  width: 100%;
+  height: 220px;
+  border-radius: 5px;
 `;
 
 export const ProductDescription = styled.Text.attrs({
@@ -33,6 +32,7 @@ export const ProductDescription = styled.Text.attrs({
 export const ProductPrice = styled.Text`
   width: 100%;
   margin-bottom: 10px;
+  font-weight: bold;
 `;
 
 export const ProductButton = styled.TouchableOpacity`

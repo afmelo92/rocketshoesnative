@@ -6,8 +6,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Container, Logo, BasketContainer, ItemCount } from './styles';
 
 export default function Header({ navigation }) {
-  console.tron.log(navigation);
-
   return (
     <Container>
       <TouchableOpacity onPress={() => navigation.navigate('Home')}>
