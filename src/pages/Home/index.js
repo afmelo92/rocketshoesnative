@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unused-state */
+/* eslint-disable react/state-in-constructor */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -23,16 +25,37 @@ export default class Home extends Component {
     products: [],
   };
 
-  async componentDidMount() {
-    const response = await api.get('products');
-
-    const data = response.data.map(product => ({
-      ...product,
-      priceFormatted: product.price,
-    }));
-
-    this.setState({ products: data });
+  componentDidMount() {
+    this.load();
   }
+
+  load = async () => {
+    try {
+      const response = await api.get('/products');
+
+      this.setState({ products: response.data });
+    } catch (err) {
+      console.tron.log(err);
+    }
+  };
+
+  renderProduct = ({ item }) => {
+    return (
+      <ProductContainer>
+        <ProductImage source={{ uri: item.image }} />
+        <ProductDescription>{item.title}</ProductDescription>
+        <ProductPrice>{item.price}</ProductPrice>
+
+        <ProductButton>
+          <ProductAmount>
+            <Icon name="add-shopping-cart" size={15} color="#FFF" />
+            <ProductCounter>3</ProductCounter>
+          </ProductAmount>
+          <ProductText>Adicionar ao carrinho</ProductText>
+        </ProductButton>
+      </ProductContainer>
+    );
+  };
 
   render() {
     const { products } = this.state;
@@ -43,21 +66,8 @@ export default class Home extends Component {
           <FlatList
             horizontal
             data={products}
-            renderItem={({ item }) => (
-              <ProductContainer key={item.id}>
-                <ProductImage />
-                <ProductDescription>{item.title}</ProductDescription>
-                <ProductPrice>{item.price}</ProductPrice>
-
-                <ProductButton>
-                  <ProductAmount>
-                    <Icon name="add-shopping-cart" size={15} color="#FFF" />
-                    <ProductCounter>3</ProductCounter>
-                  </ProductAmount>
-                  <ProductText>Adicionar ao carrinho</ProductText>
-                </ProductButton>
-              </ProductContainer>
-            )}
+            keyExtractor={item => String(item.id)}
+            renderItem={this.renderProduct}
           />
         </Container>
       </Wrapper>

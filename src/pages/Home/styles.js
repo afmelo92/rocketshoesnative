@@ -16,8 +16,7 @@ export const ProductContainer = styled.View`
   padding: 5px;
 `;
 
-export const ProductImage = styled.View`
-  background: red;
+export const ProductImage = styled.Image`
   width: 100%;
   height: 220px;
   border-radius: 5px;
