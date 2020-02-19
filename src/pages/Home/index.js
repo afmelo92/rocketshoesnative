@@ -5,6 +5,8 @@ import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { FlatList } from 'react-native';
+import { formatPrice } from '../../util/format';
+
 import api from '../../services/api';
 
 import {
@@ -33,7 +35,12 @@ export default class Home extends Component {
     try {
       const response = await api.get('/products');
 
-      this.setState({ products: response.data });
+      const data = response.data.map(product => ({
+        ...product,
+        priceFormatted: formatPrice(product.price),
+      }));
+
+      this.setState({ products: data });
     } catch (err) {
       console.tron.log(err);
     }
@@ -44,7 +51,7 @@ export default class Home extends Component {
       <ProductContainer>
         <ProductImage source={{ uri: item.image }} />
         <ProductDescription>{item.title}</ProductDescription>
-        <ProductPrice>{item.price}</ProductPrice>
+        <ProductPrice>{item.priceFormatted}</ProductPrice>
 
         <ProductButton>
           <ProductAmount>
