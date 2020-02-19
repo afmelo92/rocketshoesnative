@@ -2,6 +2,7 @@
 /* eslint-disable react/state-in-constructor */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { FlatList } from 'react-native';
@@ -22,7 +23,7 @@ import {
   ProductButton,
 } from './styles';
 
-export default class Home extends Component {
+class Home extends Component {
   state = {
     products: [],
   };
@@ -46,6 +47,15 @@ export default class Home extends Component {
     }
   };
 
+  handleAddProduct = product => {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'ADD_TO_CART',
+      product,
+    });
+  };
+
   renderProduct = ({ item }) => {
     return (
       <ProductContainer>
@@ -53,7 +63,7 @@ export default class Home extends Component {
         <ProductDescription>{item.title}</ProductDescription>
         <ProductPrice>{item.priceFormatted}</ProductPrice>
 
-        <ProductButton>
+        <ProductButton onPress={() => this.handleAddProduct(item)}>
           <ProductAmount>
             <Icon name="add-shopping-cart" size={15} color="#FFF" />
             <ProductCounter>3</ProductCounter>
@@ -81,3 +91,5 @@ export default class Home extends Component {
     );
   }
 }
+
+export default connect()(Home);
