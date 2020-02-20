@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import * as CartActions from '../../store/modules/cart/actions';
 
 import {
   Container,
@@ -23,7 +26,7 @@ import {
   CheckoutButtonText,
 } from './styles';
 
-function Cart({ cart, dispatch }) {
+function Cart({ cart, removeFromCart }) {
   return (
     <Container>
       <ProductList
@@ -34,11 +37,7 @@ function Cart({ cart, dispatch }) {
             <ProductInfos>
               <ProductImage source={{ uri: item.image }} />
               <ProductTitle>{item.title}</ProductTitle>
-              <TouchableOpacity
-                onPress={() =>
-                  dispatch({ type: 'REMOVE_FROM_CART', id: item.id })
-                }
-              >
+              <TouchableOpacity onPress={() => removeFromCart(item.id)}>
                 <Icon name="delete" size={25} color="#7159c1" />
               </TouchableOpacity>
             </ProductInfos>
@@ -72,4 +71,7 @@ const mapStateToProps = state => ({
   cart: state.cart,
 });
 
-export default connect(mapStateToProps)(Cart);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(CartActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
