@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as CartActions from '../../store/modules/cart/actions';
+import { formatPrice } from '../../util/format';
 
 import {
   Container,
@@ -26,7 +27,7 @@ import {
   CheckoutButtonText,
 } from './styles';
 
-function Cart({ cart, removeFromCart, updateAmount }) {
+function Cart({ cart, removeFromCart, updateAmount, total }) {
   function increment(product) {
     updateAmount(product.id, product.amount + 1);
   }
@@ -59,14 +60,14 @@ function Cart({ cart, removeFromCart, updateAmount }) {
                   <Icon name="add-circle" size={25} color="#7159c1" />
                 </ActionButton>
               </ActionsControls>
-              <SubtotalText>R$199,90</SubtotalText>
+              <SubtotalText>{item.subtotal}</SubtotalText>
             </ProductActions>
           </ProductContainer>
         )}
       />
       <Footer>
         <TotalText>Total</TotalText>
-        <TotalPrice>R$199,90</TotalPrice>
+        <TotalPrice>{total}</TotalPrice>
         <CheckoutButton>
           <CheckoutButtonText>Finalizar Pedido</CheckoutButtonText>
         </CheckoutButton>
@@ -76,7 +77,15 @@ function Cart({ cart, removeFromCart, updateAmount }) {
 }
 
 const mapStateToProps = state => ({
-  cart: state.cart,
+  cart: state.cart.map(product => ({
+    ...product,
+    subtotal: formatPrice(product.price * product.amount),
+  })),
+  total: formatPrice(
+    state.cart.reduce((total, product) => {
+      return total + product.price * product.amount;
+    }, 0)
+  ),
 });
 
 const mapDispatchToProps = dispatch =>
