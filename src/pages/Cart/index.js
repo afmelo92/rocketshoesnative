@@ -23,7 +23,7 @@ import {
   CheckoutButtonText,
 } from './styles';
 
-function Cart({ cart }) {
+function Cart({ cart, dispatch }) {
   return (
     <Container>
       <ProductList
@@ -34,7 +34,11 @@ function Cart({ cart }) {
             <ProductInfos>
               <ProductImage source={{ uri: item.image }} />
               <ProductTitle>{item.title}</ProductTitle>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  dispatch({ type: 'REMOVE_FROM_CART', id: item.id })
+                }
+              >
                 <Icon name="delete" size={25} color="#7159c1" />
               </TouchableOpacity>
             </ProductInfos>
