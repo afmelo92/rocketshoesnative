@@ -26,7 +26,15 @@ import {
   CheckoutButtonText,
 } from './styles';
 
-function Cart({ cart, removeFromCart }) {
+function Cart({ cart, removeFromCart, updateAmount }) {
+  function increment(product) {
+    updateAmount(product.id, product.amount + 1);
+  }
+
+  function decrement(product) {
+    updateAmount(product.id, product.amount - 1);
+  }
+
   return (
     <Container>
       <ProductList
@@ -43,11 +51,11 @@ function Cart({ cart, removeFromCart }) {
             </ProductInfos>
             <ProductActions>
               <ActionsControls>
-                <ActionButton>
+                <ActionButton onPress={() => decrement(item)}>
                   <Icon name="remove-circle" size={25} color="#7159c1" />
                 </ActionButton>
                 <AmountText>{item.amount}</AmountText>
-                <ActionButton>
+                <ActionButton onPress={() => increment(item)}>
                   <Icon name="add-circle" size={25} color="#7159c1" />
                 </ActionButton>
               </ActionsControls>
