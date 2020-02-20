@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import { call, select, put, all, takeLatest } from 'redux-saga/effects';
 import api from '../../../services/api';
 import { formatPrice } from '../../../util/format';
@@ -14,6 +15,12 @@ function* addToCart({ id }) {
   const amount = currentAmount + 1;
 
   if (amount > stockAmount) {
+    alert(
+      'Oops!',
+      'Produto fora de estoque no momento'[
+        { text: 'Ok, vou comprar outra coisa!' }
+      ]
+    );
     return;
   }
 
