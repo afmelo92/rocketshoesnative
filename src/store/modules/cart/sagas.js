@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-alert */
 import { call, select, put, all, takeLatest } from 'redux-saga/effects';
 import api from '../../../services/api';
